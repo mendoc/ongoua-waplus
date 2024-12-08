@@ -7,9 +7,11 @@
   "description": "Une extension Google Chrome pour ajouter des fonctionnalités supplémentaires à WhatsApp Web.",
   "main": "index.js",
   "scripts": {
-    "dev": "netlify functions:serve",
+    "dev": "netlify dev",
     "start": "netlify functions:serve",
-    "build": "netlify functions:build"
+    "build": "netlify functions:build",
+    "create": "netlify functions:create"
+
   },
   "repository": {
     "type": "git",
