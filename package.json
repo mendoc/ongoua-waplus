@@ -1,0 +1,29 @@
+{
+  "devDependencies": {
+    "netlify-cli": "^17.38.0"
+  },
+  "name": "ongoua-waplus",
+  "version": "1.0.0",
+  "description": "Une extension Google Chrome pour ajouter des fonctionnalités supplémentaires à WhatsApp Web.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "netlify functions:serve",
+    "start": "netlify functions:serve",
+    "build": "netlify functions:build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mendoc/ongoua-waplus.git"
+  },
+  "keywords": [
+    "whatsapp",
+    "netlify",
+    "ongoua"
+  ],
+  "author": "Dimitri ONGOUA",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mendoc/ongoua-waplus/issues"
+  },
+  "homepage": "https://github.com/mendoc/ongoua-waplus#readme"
+}
