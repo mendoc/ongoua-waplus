@@ -11,7 +11,6 @@
     "start": "netlify functions:serve",
     "build": "netlify functions:build",
     "create": "netlify functions:create"
-
   },
   "repository": {
     "type": "git",
@@ -27,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/mendoc/ongoua-waplus/issues"
   },
-  "homepage": "https://github.com/mendoc/ongoua-waplus#readme"
+  "homepage": "https://github.com/mendoc/ongoua-waplus#readme",
+  "dependencies": {
+    "firebase": "^11.0.2"
+  }
 }

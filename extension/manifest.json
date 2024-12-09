@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Ongoua WAPlus",
+  "description": "Une extension Google Chrome pour ajouter des fonctionnalités supplémentaires à WhatsApp Web.",
+  "version": "1.0",
+  "permissions": ["scripting", "activeTab"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://web.whatsapp.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["inject.js", "firebase-app.js", "firebase-firestore.js"],
+      "matches": ["https://web.whatsapp.com/*"]
+    }
+  ],
+  "host_permissions": ["https://web.whatsapp.com/*"]
+}
