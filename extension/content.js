@@ -6,6 +6,7 @@
 let debugMode = true;
 let amountToSend = 0;
 let receiptPhoneNumber = "";
+let currentChatId;
 let paneSideVisible = false;
 let currentUser = "";
 let fs;
@@ -121,8 +122,7 @@ function sendMoney() {
   debug("receipt phone number:", receiptPhoneNumber);
   showProgressDialog();
 
-  const baseUrl =
-    "https://8888-mendoc-ongouawaplus-mqtllwy5054.ws-eu117.gitpod.io";
+  const baseUrl = "https://ongoua-waplus.netlify.app";
   const URL = `${baseUrl}/${currentUser}/${receiptPhoneNumber}/${amountToSend}`;
 
   fetch(URL)
@@ -142,12 +142,15 @@ function listenTransaction() {
       console.log(d.id, d.data());
       if (!d.exists) return;
       const tx = d.data();
-      if (tx && tx.status && tx.status === "finished") {
+      if (tx && tx.status && tx.status === "ok") {
         if (tx.amount == amountToSend && tx.receipt == receiptPhoneNumber) {
           console.log("Argent envoyé");
           stopListenTransaction();
           closeDialog();
-          sendMessage();
+          const msg = tx.sms
+            ? tx.sms
+            : `Vous avez envoye ${tx.amount}F au ${tx.receipt}`;
+          sendMessage(msg);
         }
       }
     }
@@ -197,8 +200,9 @@ function closeDialog() {
   document.querySelector('div[role="dialog"] [data-icon="x"]').click();
 }
 
-function sendMessage(){
-    console.log("Envoi du message...")
+function sendMessage(msg) {
+  console.log("Envoi du message...");
+  window.postMessage({ type: "TX_OK", chatId: currentChatId, content: msg }, "*");
 }
 
 function listenDOMInsertions(mutationsList) {
@@ -390,9 +394,10 @@ window.addEventListener(
     if (event.data.type === "USER") {
       console.log("content.js: Current user", event.data.user);
       currentUser = event.data.user;
-    } else if (event.data.type === "STORE_READY") {
-      console.log("content.js: Store reçu", event.data.contact);
-      setReceiptPhoneNumber(event.data.contact);
+    } else if (event.data.type === "CHAT_CHANGED") {
+      console.log("content.js: Chat changé", event.data.contact);
+      currentChatId = event.data.contact;
+      setReceiptPhoneNumber(currentChatId);
     } else if (event.data.type === "STORE_ERROR") {
       console.log("content.js: Erreur reçue", event.data.error);
     }
