@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ongoua WAPlus Simulator</title>
+    <link rel="manifest" href="/simulator/manifest.json" />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
+    />
+
+    <style>
+      ion-checkbox {
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Ongoua WAPlus Simulator</ion-title>
+        <ion-progress-bar type="indeterminate"></ion-progress-bar>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-input
+        clear-input="true"
+        label="ID du téléphone"
+        fill="outline"
+        label-placement="floating"
+        placeholder="Entrez l'identfiant du téléphone"
+        error-text="Aucun téléphone trouvé avec cet identifiant."
+        id="phone-id"
+      ></ion-input>
+
+      <h2>Détails de la transaction</h2>
+      <ion-grid>
+        <ion-row>
+          <ion-col>Bénéficiaire</ion-col>
+          <ion-col id="receipt">--</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>Montant</ion-col>
+          <ion-col><span id="amount">--</span> F CFA</ion-col>
+        </ion-row>
+      </ion-grid>
+      <h2>Changer le statut</h2>
+      <div>
+        <ion-chip color="primary" value="pending">En attente</ion-chip>
+        <ion-chip color="secondary" value="progress">En traitement</ion-chip>
+        <ion-chip color="success" value="ok">Traité</ion-chip>
+        <ion-chip color="danger" value="error">Erreur</ion-chip>
+        <ion-chip color="warning" value="timeout">Expiré</ion-chip>
+      </div>
+      <h2>SMS à envoyer</h2>
+      <ion-card>
+        <ion-card-content>
+          <p id="sms">
+            Vous avez envoye <span id="amount-sms">XXX</span>F au
+            <span id="receipt-sms">XXXXXXXXX</span> CELESTIN LOMBA. Frais 250F. <span id="balance-sms"></span>
+            TID:<span id="id-tx">PPXXXXXX.XXXX.XXXXXX</span>.
+          </p>
+        </ion-card-content>
+      </ion-card>
+      <ion-checkbox id="includeBalance" label-placement="end">Conserver le solde dans le SMS</ion-checkbox>
+      <ion-toast duration="3000"></ion-toast>
+    </ion-content>
+
+    <script>
+      window.addEventListener("DOMContentLoaded", async (event) => {
+        if ("serviceWorker" in navigator) {
+          navigator.serviceWorker.register("./sw.js");
+        }
+      });
+    </script>
+    <script type="module" src="simulator.js"></script>
+  </body>
+</html>

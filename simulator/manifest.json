@@ -1,0 +1,27 @@
+{
+    "lang": "fr",
+    "name": "WAPlus Simulateur",
+    "short_name": "WAPlus Simu",
+    "description": "Simulateur pour Ongoua WAPlus.",
+    "theme_color": "#1DAA61",
+    "background_color": "#ffffff",
+    "start_url": "./index.html?utm_medium=PWA&utm_source=launcher",
+    "id": "ongoua-waplus-simulator",
+    "display": "standalone",
+    "orientation": "portrait",
+    "categories": ["finance"],
+    "icons": [
+      {
+        "src": "../extension/images/icon-144.png",
+        "type": "image/png",
+        "sizes": "144x144"
+      },
+      {
+        "src": "../extension/images/icon-144.png",
+        "type": "image/png",
+        "sizes": "144x144",
+        "purpose": "maskable"
+      }
+    ],
+    "dir": "ltr"
+  }
