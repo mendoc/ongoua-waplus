@@ -24,6 +24,8 @@ import {
   let transaction = null;
   const toast = _("ion-toast");
   let unsub = null;
+  const smsHTML = `Vous avez envoye <span id="amount-sms">XXX</span>F au <span id="receipt-sms">XXXXXXXXX</span> CELESTIN LOMBA. \nFrais 250F. <span id="balance-sms"></span>TID:<span id="id-tx">PPXXXXXX.XXXX.XXXXXX</span>.`;
+  _h("sms", smsHTML);
 
   showProgressBar(false);
   _v("phone-id", phoneId());
@@ -56,7 +58,7 @@ import {
 
   function updateSMS(includeBalance) {
     console.log("includeBalance", includeBalance == true);
-    const txt = includeBalance == true ? "Nouveau Solde 30815.43F." : "";
+    const txt = includeBalance == true ? "Nouveau Solde 30815.43F.\n" : "";
     _("#balance-sms").textContent = txt;
     if (transaction) transaction.sms = _t("sms");
   }
@@ -176,6 +178,13 @@ import {
     const el = document.getElementById(elid);
     if (el && v) {
       el.value = v;
+    } else return el.value;
+  }
+
+  function _h(elid, h) {
+    const el = document.getElementById(elid);
+    if (el && h) {
+      el.innerHTML = h;
     } else return el.value;
   }
 })();
