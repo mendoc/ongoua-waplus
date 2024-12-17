@@ -21,7 +21,7 @@ export default async (request, context) => {
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    await setDoc(doc(db, "transactions", device), null);
+    await setDoc(doc(db, "transactions", device), {});
 
     return Response.json(
       {
